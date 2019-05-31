@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="$mapperClassName">
-##    <cache eviction="LRU" type="com.ybwx.common.mysql.cache.MybatisRedisCache"/>
     <resultMap id="BaseResultMap" type="$entityClassName">
 #if($table.columnKey)
         <id column="$table.columnKey.columnName" property="$table.columnKey.propertyName"/>
@@ -91,7 +90,7 @@
         where `$table.columnKey.columnName`=#{${table.columnKey.propertyName}}
     </select>
 #end
-    
+
 #if($table.columnKey)
     <delete id="deleteByPrimaryKey">
         DELETE FROM $tableName

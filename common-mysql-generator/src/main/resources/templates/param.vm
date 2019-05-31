@@ -1,6 +1,6 @@
 package $paramPackage;
 
-import com.datamesh.mysql.common.QueryParam;
+import com.steve.mysql.common.QueryParam;
 import java.util.Collection;
 
 import lombok.AllArgsConstructor;

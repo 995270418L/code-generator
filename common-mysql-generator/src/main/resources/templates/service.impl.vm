@@ -1,6 +1,6 @@
 package $serviceImplPackage;
 
-import com.datamesh.mysql.common.impl.BaseServiceImpl;
+import com.steve.mysql.common.impl.BaseServiceImpl;
 import $entityClassName;
 import $mapperClassName;
 import $serviceClassName;
