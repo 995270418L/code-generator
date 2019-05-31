@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.steve.mapper.ProjectEntityMapper">
+    <resultMap id="BaseResultMap" type="com.steve.entity.ProjectEntity">
+        <id column="id" property="id"/>
+        <result column="pm_id" property="pmId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="pkg_name" property="pkgName"/>
+        <result column="service_name" property="serviceName"/>
+        <result column="version" property="version"/>
+        <result column="sys_project" property="sysProject"/>
+        <result column="cpu_arch" property="cpuArch"/>
+        <result column="package_type" property="packageType"/>
+        <result column="system" property="system"/>
+        <result column="licensefile" property="licensefile"/>
+        <result column="filename" property="filename"/>
+        <result column="filesize" property="filesize"/>
+        <result column="port" property="port"/>
+        <result column="dependency" property="dependency"/>
+        <result column="insert_time" property="insertTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into dm_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+    <if test="id != null">
+            `id`,
+    </if>
+    <if test="pmId != null">
+            `pm_id`,
+    </if>
+    <if test="name != null">
+            `name`,
+    </if>
+    <if test="description != null">
+            `description`,
+    </if>
+    <if test="pkgName != null">
+            `pkg_name`,
+    </if>
+    <if test="serviceName != null">
+            `service_name`,
+    </if>
+    <if test="version != null">
+            `version`,
+    </if>
+    <if test="sysProject != null">
+            `sys_project`,
+    </if>
+    <if test="cpuArch != null">
+            `cpu_arch`,
+    </if>
+    <if test="packageType != null">
+            `package_type`,
+    </if>
+    <if test="system != null">
+            `system`,
+    </if>
+    <if test="licensefile != null">
+            `licensefile`,
+    </if>
+    <if test="filename != null">
+            `filename`,
+    </if>
+    <if test="filesize != null">
+            `filesize`,
+    </if>
+    <if test="port != null">
+            `port`,
+    </if>
+    <if test="dependency != null">
+            `dependency`,
+    </if>
+    <if test="insertTime != null">
+            `insert_time`,
+    </if>
+    <if test="updateTime != null">
+            `update_time`,
+    </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+    <if test="id != null">
+            #{id},
+    </if>
+    <if test="pmId != null">
+            #{pmId},
+    </if>
+    <if test="name != null">
+            #{name},
+    </if>
+    <if test="description != null">
+            #{description},
+    </if>
+    <if test="pkgName != null">
+            #{pkgName},
+    </if>
+    <if test="serviceName != null">
+            #{serviceName},
+    </if>
+    <if test="version != null">
+            #{version},
+    </if>
+    <if test="sysProject != null">
+            #{sysProject},
+    </if>
+    <if test="cpuArch != null">
+            #{cpuArch},
+    </if>
+    <if test="packageType != null">
+            #{packageType},
+    </if>
+    <if test="system != null">
+            #{system},
+    </if>
+    <if test="licensefile != null">
+            #{licensefile},
+    </if>
+    <if test="filename != null">
+            #{filename},
+    </if>
+    <if test="filesize != null">
+            #{filesize},
+    </if>
+    <if test="port != null">
+            #{port},
+    </if>
+    <if test="dependency != null">
+            #{dependency},
+    </if>
+    <if test="insertTime != null">
+            #{insertTime},
+    </if>
+    <if test="updateTime != null">
+            #{updateTime},
+    </if>
+        </trim>
+    </insert>
+
+    <update id="update">
+        update dm_project
+        <set>
+            <if test="pmId != null">
+                `pm_id`=#{pmId},
+            </if>
+            <if test="name != null">
+                `name`=#{name},
+            </if>
+            <if test="description != null">
+                `description`=#{description},
+            </if>
+            <if test="pkgName != null">
+                `pkg_name`=#{pkgName},
+            </if>
+            <if test="serviceName != null">
+                `service_name`=#{serviceName},
+            </if>
+            <if test="version != null">
+                `version`=#{version},
+            </if>
+            <if test="sysProject != null">
+                `sys_project`=#{sysProject},
+            </if>
+            <if test="cpuArch != null">
+                `cpu_arch`=#{cpuArch},
+            </if>
+            <if test="packageType != null">
+                `package_type`=#{packageType},
+            </if>
+            <if test="system != null">
+                `system`=#{system},
+            </if>
+            <if test="licensefile != null">
+                `licensefile`=#{licensefile},
+            </if>
+            <if test="filename != null">
+                `filename`=#{filename},
+            </if>
+            <if test="filesize != null">
+                `filesize`=#{filesize},
+            </if>
+            <if test="port != null">
+                `port`=#{port},
+            </if>
+            <if test="dependency != null">
+                `dependency`=#{dependency},
+            </if>
+            <if test="insertTime != null">
+                `insert_time`=#{insertTime},
+            </if>
+            <if test="updateTime != null">
+                `update_time`=#{updateTime},
+            </if>
+        </set>
+        where `id`=#{id}
+    </update>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        <include refid="findList"/>
+    </select>
+    <sql id="findList">
+        select
+        *
+        from dm_project
+        <where>
+            <if test="id != null">
+                and `id`=#{id}
+            </if>
+            <if test="idCollection  != null">
+                and `id` in
+                <foreach collection="idCollection" open="(" close=")" separator="," item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        ORDER by id desc
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM dm_project
+        where `id`=#{id}
+    </select>
+
+</mapper>

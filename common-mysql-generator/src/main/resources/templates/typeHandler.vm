@@ -1,0 +1,10 @@
+package com.steve.mysql.type;
+
+import $typePath;
+
+/**
+ * create by steve
+ * blog: https://www.jianshu.com/u/c8df39415ca7
+ */
+public class $typeHandlerName extends BaseTypeHandler<$typeName> {
+}

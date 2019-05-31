@@ -1,0 +1,12 @@
+package $servicePackage;
+
+import com.datamesh.mysql.common.BaseService;
+import $entityClassName;
+
+/**
+ * create by steve
+ * blog: https://www.jianshu.com/u/c8df39415ca7
+ */
+public interface $serviceName extends BaseService<$entityName> {
+
+}

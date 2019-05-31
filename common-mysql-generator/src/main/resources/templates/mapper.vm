@@ -1,0 +1,14 @@
+package $mapperPackage;
+
+import org.apache.ibatis.annotations.Mapper;
+import com.datamesh.mysql.common.BaseMapper;
+import $entityClassName;
+
+/**
+ * create by steve
+ * blog: https://www.jianshu.com/u/c8df39415ca7
+ */
+@Mapper
+public interface $mapperName extends BaseMapper<$entityName> {
+
+}

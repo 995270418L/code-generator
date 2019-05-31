@@ -1,0 +1,29 @@
+package $entityPackage;
+
+#if($table.dataTypeSet)
+#foreach($item in $table.dataTypeSet)
+import $item;
+#end
+#end
+import com.datamesh.mysql.common.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * create by steve
+ * blog: https://www.jianshu.com/u/c8df39415ca7
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class $entityName extends BaseEntity<$entityName> {
+
+#if($table.columnKey)
+    private $table.columnKey.propertyDataType $table.columnKey.propertyName;
+#end
+#foreach($item in $table.columnList)
+    private $item.propertyDataType $item.propertyName;
+#end
+
+}

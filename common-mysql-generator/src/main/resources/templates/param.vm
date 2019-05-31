@@ -1,0 +1,35 @@
+package $paramPackage;
+
+import com.datamesh.mysql.common.QueryParam;
+import java.util.Collection;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * create by steve
+ * blog: https://www.jianshu.com/u/c8df39415ca7
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class $paramName implements QueryParam {
+
+#if($table.columnKey)
+    private $table.columnKey.propertyDataType $table.columnKey.propertyName;
+#end
+#foreach($item in $table.columnList)
+    private $item.propertyDataType $item.propertyName;
+#end
+#if($table.columnKeyCollection)
+    private Collection<$table.columnKeyCollection.propertyDataType> $table.columnKeyCollection.propertyNameCollection;
+#end
+    @Override
+    public boolean hasData() {
+        return false;
+    }
+
+}
