@@ -116,11 +116,15 @@ public class DBUtil {
             Column columnKeyCollection = null;
             List<Column> columnList = new ArrayList<Column>();
             while (rs.next()) {
-                /**
-                 * 所有以 _type 结尾的数据库字段都会自动生成一个 typeHandler 类处理
-                 */
+
                 String columnName = rs.getString("COLUMN_NAME");
                 String propertyName = getVariable(columnName);
+                String columnDataType = rs.getString("DATA_TYPE");
+                String propertyDataType = config.getProperty(columnDataType);
+                String typeHandler = null;
+                /**
+                 * 所有以 _type 结尾的数据库字段都会自动生成一个 typeHandler 类处理, 生成的type enums 类需要自己修改其中的 enum 字段
+                 */
                 if(columnName.endsWith("_type")){
                     // 生成 type 文件
                     Map<String, Object> data = new HashMap<>();
@@ -140,23 +144,10 @@ public class DBUtil {
                             CodeUtil.convertClassNameToPath(TYPE_DESERIALIZER_PATH + tmpPropertyName + "JsonDeserializer", "java"));
                     MakerInsertSelect.makeFile(data,"typeJsonSerializer.vm", TYPE_FILE_MODULE,
                             CodeUtil.convertClassNameToPath(TYPE_SERIALIZER_PATH + tmpPropertyName + "JsonSerializer", "java"));
+                    propertyDataType = TYPE_PATH_PREFIX + tmpPropertyName;
+                    typeHandler = TYPE_HANDLER_PATH + tmpPropertyName + "Handler";
                 }
-                String columnDataType = rs.getString("DATA_TYPE");
                 String columnComment = rs.getString("COLUMN_COMMENT");
-
-                String typeHandler = null;
-                String propertyDataType = config.getProperty(tableName + "." + columnName);
-                if (propertyDataType == null) {
-                    propertyDataType = config.getProperty(columnDataType);
-                    if (propertyDataType == null) {
-                        throw new RuntimeException("columnDataType:" + columnDataType + "在properties文件里找不到");
-                    }
-                } else {
-                    String[] split = propertyDataType.split("\\|");
-                    propertyDataType = split[0];
-                    typeHandler = split[1];
-                }
-
                 propertyDataType = propertyDataType.trim();
                 int index = propertyDataType.lastIndexOf(".");
                 if (index != -1) {

@@ -9,9 +9,6 @@ import java.io.Serializable;
 
 /**
  * BaseEntity
- *
- * @author CuiShuai
- * @date 16/9/12
  */
 @Slf4j
 @Data

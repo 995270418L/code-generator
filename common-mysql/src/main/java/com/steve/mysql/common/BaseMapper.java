@@ -3,6 +3,7 @@ package com.steve.mysql.common;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface BaseMapper<T> {
@@ -12,6 +13,7 @@ public interface BaseMapper<T> {
     int deleteByPrimaryKeyIn(@Param("ids") List<Long> ids);
 
     int insert(T record);
+    int batchInsert(List<T> records);
 
 //    int insertSelective(T record);
 

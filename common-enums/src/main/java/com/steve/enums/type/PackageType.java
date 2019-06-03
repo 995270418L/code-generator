@@ -9,7 +9,7 @@ import java.util.HashMap;
  */
 public enum PackageType implements BaseEnumInterface {
 
-    TEST(1, "test"); // Template code, it should be replace the true code
+    TEST(1, "test"); // Template code, and it's be replace the true code
 
     private static Map<Integer, PackageType> _MAP = new HashMap();
 

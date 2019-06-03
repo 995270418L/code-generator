@@ -64,11 +64,11 @@
             <if test="${table.columnKey.propertyName} != null">
                 and `$table.columnKey.columnName`=#{${table.columnKey.propertyName}}
             </if>
-        #foreach($item in $table.columnList)
-            <if test="${item.propertyName}" !="null">
+#foreach($item in $table.columnList)
+            <if test="${item.propertyName} !=null">
                 and `$item.columnName`=#{${item.propertyName}#if($item.typeHandler),typeHandler=$item.typeHandler#end}
             </if>
-        #end
+#end
 #if($table.columnKeyCollection)
             <if test="${table.columnKeyCollection.propertyNameCollection}  != null">
                 and `$table.columnKeyCollection.columnName` in
@@ -96,5 +96,40 @@
         DELETE FROM $tableName
         where `$table.columnKey.columnName`=#{${table.columnKey.propertyName}}
     </delete>
+#end
+
+#if($table.columnKey)
+    <delete id="deleteByPrimaryKeyIn">
+        DELETE FROM $tableName
+        where `$table.columnKey.columnName` in
+        <foreach collection="ids" separator="," open="(" close=")" item="item">
+            #{item.${table.columnKey.propertyName}}
+        </foreach>
+    </delete>
+#end
+
+#if($table.columnKey)
+    <select id="batchInsert" resultMap="BaseResultMap">
+        INSERT INTO $tableName
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+#if($table.columnKey)
+            `$table.columnKey.columnName`,
+#end
+#foreach($item in $table.columnList)
+            `$item.columnName`,
+#end
+        </trim>
+        VALUES
+        <foreach collection="records" separator="," item="item">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+#if($table.columnKey)
+                #{item.$table.columnKey.propertyName},
+#end
+#foreach($item in $table.columnList)
+                #{item.$item.propertyName#if($item.typeHandler),typeHandler=$item.typeHandler#end},
+#end
+            </trim>
+        </foreach>
+    </select>
 #end
 </mapper>

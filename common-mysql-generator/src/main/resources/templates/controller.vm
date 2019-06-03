@@ -1,0 +1,30 @@
+package $controllerPackage;
+
+import com.datamesh.util.vo.ResultVO;
+import $entityResponseClassName;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * create by steve
+ * blog: https://www.jianshu.com/u/c8df39415ca7
+ */
+@Slf4j
+@RestController
+@RequestMapping("$controllerPrefix")
+public class $controllerName {
+
+    @Autowired
+    private $serviceName $servicePropName;
+
+    @GetMapping
+    public ResultVO<?> detail(@RequestParam("id") $table.columnKey.propertyDataType $table.columnKey.propertyName){
+        return new ResultVO<>($entityResponseName.valueOf($servicePropName.selectByPrimaryKey($table.columnKey.propertyName)));
+    }
+
+    @PostMapping("/update")
+    public ResultVO<?> update(@RequestBody $entityRequestName $entityReqeustPropName){
+        // 填充 entity 数据
+    }
+}
